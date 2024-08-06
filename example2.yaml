@@ -1,0 +1,40 @@
+- name: Example jinja2 AS3 template
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: false
+  
+## Playbook Vars Here 
+  vars:
+    VIRTUALS:
+      - name: "example1"
+        virtualAddresses: "10.0.1.10"
+        default_pool: "web_pool1"
+      - name: "example2"
+        virtualAddresses: "10.0.1.11"
+        default_pool: "web_pool2"
+      - name: "example3"
+        virtualAddresses: "10.0.1.12"
+        default_pool: "web_pool3"
+    POOLS:
+      - name: "web_pool1"
+        servicePort: 80
+        serverAddresses: 
+          - "192.0.1.10"
+          - "192.0.1.11"
+      - name: "web_pool2"
+        servicePort: 80
+        serverAddresses: 
+          - "192.0.2.10"
+          - "192.0.2.11"
+      - name: "web_pool3"
+        servicePort: 80
+        serverAddresses: 
+          - "192.0.3.10"
+          - "192.0.3.11"
+
+  tasks:
+
+    - name: Build AS3 declaration in files/example2-AS3.json
+      template:
+        src: "{{ playbook_dir }}/templates/example2.j2"
+        dest: "{{ playbook_dir }}/files/example2-AS3.json"
