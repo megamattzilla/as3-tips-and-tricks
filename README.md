@@ -1,13 +1,13 @@
 # AS3 Tips and Tricks! 
 
-1.  [Increase Memory and Timeouts](#1)  
+1.  [Increase REST Memory and Timeouts](#1)  
 2.  [Use a Templating Engine](#2)  
 3.  [Multi-Team: Refer to something outside AS3](#3)  
 4.  [Multi-Team: Shared AS3 Workflow](#4)  
 5.  [Always Dry Run in Prod](#5)  
 
 
-## #1 Increase memory and timeouts to improve Big-IP REST <a name="1"></a>
+## #1 Increase REST memory and timeouts to improve Big-IP REST experience <a name="1"></a>
 Per [AS3 Best Practices guide](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/userguide/best-practices.html#increase-timeout-values-if-the-rest-api-is-timing-out)   
 
 Increase internal timeouts from 60 to 600 seconds:
@@ -56,7 +56,12 @@ tmsh restart sys service restnoded
 ___
 
 ## #2 Use a Templating Engine <a name="2"></a>
+![alt text](2024-08-08_17-08-07.png)
+
 Two common templating engines for AS3 schema is [FAST](https://clouddocs.f5.com/products/extensions/f5-appsvcs-templates/latest/) and [jinja2](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_templating.html)
+  
+All examples below are using jinja2.
+
 
 To see how these templating engines can help, lets take a look at the AS3 schema [getting started simple HTTP server](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/declarations/getting-started.html#simple-http-application) in YAML  
 * Omitted first 9 lines for brevity  
@@ -218,12 +223,14 @@ Example PATCH:
 
 Sometimes, yes.  
 
+*Note: if your use-case is to modify LTM pools outside AS3 and merge with AS3, consider using [event driven service discovery](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/declarations/discovery.html#event-driven-service-discovery) for that. 
+
 I have tested some AS3 classes such as `Data_Group` and found that rather than AS3 PATCH you can perform an outside-of-AS3 imperative change with REST API or ansible module.   
 
 The next AS3 POST will pickup the change you made outside of AS3, notice that it matches desired state (shared variable updated AS3 desired state), and report no changes needed. 
 
 Not all AS3 classes have the ability to due this. See [AS3 issue #580](https://github.com/F5Networks/f5-appsvcs-extension/issues/850).
-
+  
 > Hands on activity:
 > 1. git clone this repo to a system with ansible installed  
 > `git clone git@github.com:megamattzilla/as3-tips-and-tricks.git`  
@@ -375,6 +382,7 @@ Example of terraform-esque output:
 >
 > 6. Example output is located in `example5-dryrun-response.json` that should match your output from Big-IP.
 >
-> 7. Parse AS3 dry run output to be human readable:
-> 
+> 7. Parse AS3 dry run output to be human readable:  
+> Note: you may need to install `jq`
+>
 > `./parse_as3_dryrun.sh example5-dryrun-response.json`

@@ -1,0 +1,20 @@
+flowchart LR
+subgraph With Template
+    direction LR
+    A[fewest inputs possible: 
+    virtuals x 3
+    pools x 3] --> B{jinja2 template 
+    with AS3 schema}
+    B --> C(AS3) 
+    end
+
+subgraph Without Template
+    direction LR
+    D[more AS3 schema:
+    virtual
+    virtual 
+    virtual
+    pool
+    pool
+    pool] --> F(AS3)
+    end
