@@ -1,0 +1,23 @@
+classDiagram
+    AS3 --> Virtuals
+    AWAF_policy --> BigIP
+    Virtuals --> Pools
+    Virtuals --> AWAF_policy
+    class Virtuals{
+      "class": "Service_HTTP",
+      "name": "example1"
+    }
+    class Pools{
+      "class": "Pool",
+      "name": "web_pool"
+    }
+    class AWAF_policy{
+      "class": "WAF_Policy",
+      "policyWAF": "bigip pointer"
+    }
+    class BigIP{
+      /Common/Team2_AWAF_Policy
+    }
+    class AS3{
+      "tenant": "example1"
+    }

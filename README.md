@@ -156,6 +156,7 @@ The jinja2 template is located in `templates/example2.j2`
 ___
 
 ## #3 Multi-Team: Refer to something outside AS3 <a name="3"></a>
+![alt text](2024-08-08_17-28-41.png)
 
 In example #2, we created virtual servers and pools in AS3 schema. 
 
@@ -169,7 +170,7 @@ You have two teams co-managing a device using AS3.
 
 Team1 could simply refer to the AWAF policy created by Team2 using the `bigip` pointer: 
 ```yaml
-            service:
+            example1:
                 class: Service_HTTP
                 virtualAddresses:
                     - 10.0.1.10
@@ -182,6 +183,8 @@ Any changes Team2 makes to the AWAF policy `Team2_AWAF_Policy` will occur direct
 ___
 
 ## #4 Multi-Team: linked AS3 Workflow <a name="4"></a>
+
+![alt text](2024-08-08_17-49-18.png)
 
 You have two teams co-managing a device using AS3. 
 - Team1 can author a complicated AS3 post with entire AS3 schema
@@ -259,6 +262,7 @@ Not all AS3 classes have the ability to due this. See [AS3 issue #580](https://g
 ___
 
 ## #5 Always Dry Run in Prod <a name="5"></a>
+![alt text](2024-08-08_15-52-59.png)
 
 AS3 has a dry run feature that will process an AS3 declaration, without making a change, and report back a pass/fail. 
 

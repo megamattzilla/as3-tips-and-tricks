@@ -1,0 +1,22 @@
+flowchart LR
+    X --> Z(AS3 on BIG-IP) 
+    B --> Z(AS3 on BIG-IP) 
+    Y[Shared Variable File:
+    AWAF policy URL] --> D
+    Y[Shared Variable File:
+    AWAF policy URL] --> A
+
+subgraph Team1 Workflow
+    direction LR
+    D[render all AS3 schema:
+    virtuals
+    pools
+    AWAF policy] --> X(AS3 POST)
+end
+
+subgraph Team2 Workflow
+    direction LR
+    A[small schema change:
+    change AWAF policy URL] --> B(AS3 PATCH)
+end
+
