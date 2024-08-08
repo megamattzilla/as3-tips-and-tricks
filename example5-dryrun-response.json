@@ -1,0 +1,587 @@
+{
+    "results": [
+        {
+            "code": 200,
+            "message": "success",
+            "dryRun": true,
+            "lineCount": 29,
+            "host": "localhost",
+            "tenant": "example1",
+            "runTime": 1611,
+            "declarationId": "urn:uuid:33045210-3ab8-4636-9b2a-c98d22ab915d"
+        }
+    ],
+    "declaration": {
+        "example1": {
+            "class": "Tenant",
+            "example1": {
+                "class": "Application",
+                "example1": {
+                    "class": "Service_HTTP",
+                    "virtualAddresses": [
+                        "10.0.1.11"
+                    ],
+                    "pool": "web_pool1"
+                },
+                "web_pool1": {
+                    "class": "Pool",
+                    "monitors": [
+                        "http"
+                    ],
+                    "members": [
+                        {
+                            "servicePort": 8080,
+                            "serverAddresses": [
+                                "192.0.1.10",
+                                "192.0.1.15"
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "class": "ADC",
+        "schemaVersion": "3.0.0",
+        "id": "urn:uuid:33045210-3ab8-4636-9b2a-c98d22ab915d",
+        "controls": {
+            "dryRun": true,
+            "traceResponse": true,
+            "archiveTimestamp": "2024-08-08T20:36:45.468Z"
+        },
+        "label": "Sample 1",
+        "remark": "Simple HTTP application with RR pool",
+        "updateMode": "selective"
+    },
+    "traces": {
+        "example1Desired": {
+            "/example1/example1/": {
+                "command": "sys folder",
+                "properties": {},
+                "ignore": []
+            },
+            "/example1/Service_Address-10.0.1.11": {
+                "command": "ltm virtual-address",
+                "properties": {
+                    "address": "10.0.1.11",
+                    "arp": "enabled",
+                    "icmp-echo": "enabled",
+                    "mask": "255.255.255.255",
+                    "route-advertisement": "disabled",
+                    "spanning": "disabled",
+                    "server-scope": "any",
+                    "traffic-group": "default"
+                },
+                "ignore": []
+            },
+            "/example1/example1/example1": {
+                "command": "ltm virtual",
+                "properties": {
+                    "enabled": "",
+                    "address-status": "yes",
+                    "auto-lasthop": "default",
+                    "connection-limit": 0,
+                    "rate-limit": "disabled",
+                    "description": "\"example1\"",
+                    "destination": "/example1/10.0.1.11:80",
+                    "ip-protocol": "tcp",
+                    "last-hop-pool": "none",
+                    "mask": "255.255.255.255",
+                    "mirror": "disabled",
+                    "persist": {
+                        "/Common/cookie": {
+                            "default": "yes"
+                        }
+                    },
+                    "pool": "/example1/example1/web_pool1",
+                    "policies": {},
+                    "profiles": {
+                        "/Common/http": {
+                            "context": "all"
+                        },
+                        "/Common/f5-tcp-progressive": {
+                            "context": "all"
+                        }
+                    },
+                    "service-down-immediate-action": "none",
+                    "source": "0.0.0.0/0",
+                    "source-address-translation": {
+                        "type": "automap"
+                    },
+                    "rules": {},
+                    "security-log-profiles": {},
+                    "source-port": "preserve",
+                    "translate-address": "enabled",
+                    "translate-port": "enabled",
+                    "nat64": "disabled",
+                    "vlans": {},
+                    "vlans-disabled": " ",
+                    "metadata": {},
+                    "clone-pools": {}
+                },
+                "ignore": []
+            },
+            "/example1/192.0.1.10": {
+                "command": "ltm node",
+                "properties": {
+                    "address": "192.0.1.10",
+                    "metadata": {}
+                },
+                "ignore": []
+            },
+            "/example1/192.0.1.15": {
+                "command": "ltm node",
+                "properties": {
+                    "address": "192.0.1.15",
+                    "metadata": {}
+                },
+                "ignore": []
+            },
+            "/example1/example1/web_pool1": {
+                "command": "ltm pool",
+                "properties": {
+                    "load-balancing-mode": "round-robin",
+                    "members": {
+                        "/example1/192.0.1.10:8080": {
+                            "connection-limit": 0,
+                            "dynamic-ratio": 1,
+                            "fqdn": {
+                                "autopopulate": "disabled"
+                            },
+                            "minimumMonitors": 1,
+                            "monitor": {
+                                "default": {}
+                            },
+                            "priority-group": 0,
+                            "rate-limit": "disabled",
+                            "ratio": 1,
+                            "state": "user-up",
+                            "session": "user-enabled",
+                            "metadata": {}
+                        },
+                        "/example1/192.0.1.15:8080": {
+                            "connection-limit": 0,
+                            "dynamic-ratio": 1,
+                            "fqdn": {
+                                "autopopulate": "disabled"
+                            },
+                            "minimumMonitors": 1,
+                            "monitor": {
+                                "default": {}
+                            },
+                            "priority-group": 0,
+                            "rate-limit": "disabled",
+                            "ratio": 1,
+                            "state": "user-up",
+                            "session": "user-enabled",
+                            "metadata": {}
+                        }
+                    },
+                    "min-active-members": 1,
+                    "minimumMonitors": 1,
+                    "monitor": {
+                        "/Common/http": {}
+                    },
+                    "reselect-tries": 0,
+                    "service-down-action": "none",
+                    "slow-ramp-time": 10,
+                    "allow-nat": "yes",
+                    "allow-snat": "yes",
+                    "metadata": {}
+                },
+                "ignore": []
+            },
+            "/example1/": {
+                "command": "auth partition",
+                "properties": {
+                    "default-route-domain": 0
+                },
+                "ignore": []
+            }
+        },
+        "example1Current": {
+            "/example1/": {
+                "command": "auth partition",
+                "properties": {
+                    "default-route-domain": 0
+                },
+                "ignore": []
+            },
+            "/example1/192.0.1.10": {
+                "command": "ltm node",
+                "properties": {
+                    "address": "192.0.1.10",
+                    "metadata": {}
+                },
+                "ignore": []
+            },
+            "/example1/192.0.1.11": {
+                "command": "ltm node",
+                "properties": {
+                    "address": "192.0.1.11",
+                    "metadata": {}
+                },
+                "ignore": []
+            },
+            "/example1/example1/web_pool1": {
+                "command": "ltm pool",
+                "properties": {
+                    "load-balancing-mode": "round-robin",
+                    "members": {
+                        "/example1/192.0.1.10:80": {
+                            "connection-limit": 0,
+                            "dynamic-ratio": 1,
+                            "fqdn": {
+                                "autopopulate": "disabled"
+                            },
+                            "minimumMonitors": 1,
+                            "monitor": {
+                                "default": {}
+                            },
+                            "priority-group": 0,
+                            "rate-limit": "disabled",
+                            "ratio": 1,
+                            "state": "user-up",
+                            "session": "user-enabled",
+                            "metadata": {}
+                        },
+                        "/example1/192.0.1.11:80": {
+                            "connection-limit": 0,
+                            "dynamic-ratio": 1,
+                            "fqdn": {
+                                "autopopulate": "disabled"
+                            },
+                            "minimumMonitors": 1,
+                            "monitor": {
+                                "default": {}
+                            },
+                            "priority-group": 0,
+                            "rate-limit": "disabled",
+                            "ratio": 1,
+                            "state": "user-up",
+                            "session": "user-enabled",
+                            "metadata": {}
+                        }
+                    },
+                    "min-active-members": 1,
+                    "minimumMonitors": 1,
+                    "monitor": {
+                        "/Common/http": {}
+                    },
+                    "reselect-tries": 0,
+                    "service-down-action": "none",
+                    "slow-ramp-time": 10,
+                    "allow-nat": "yes",
+                    "allow-snat": "yes",
+                    "metadata": {}
+                },
+                "ignore": []
+            },
+            "/example1/example1/example1": {
+                "command": "ltm virtual",
+                "properties": {
+                    "enabled": true,
+                    "address-status": "yes",
+                    "auto-lasthop": "default",
+                    "connection-limit": 0,
+                    "rate-limit": "disabled",
+                    "description": "\"example1\"",
+                    "destination": "/example1/10.0.1.10:80",
+                    "ip-protocol": "tcp",
+                    "last-hop-pool": "none",
+                    "mask": "255.255.255.255",
+                    "mirror": "disabled",
+                    "persist": {
+                        "/Common/cookie": {
+                            "default": "yes"
+                        }
+                    },
+                    "pool": "/example1/example1/web_pool1",
+                    "policies": {},
+                    "profiles": {
+                        "/Common/f5-tcp-progressive": {
+                            "context": "all"
+                        },
+                        "/Common/http": {
+                            "context": "all"
+                        }
+                    },
+                    "service-down-immediate-action": "none",
+                    "source": "0.0.0.0/0",
+                    "source-address-translation": {
+                        "type": "automap"
+                    },
+                    "rules": {},
+                    "security-log-profiles": {},
+                    "source-port": "preserve",
+                    "translate-address": "enabled",
+                    "translate-port": "enabled",
+                    "nat64": "disabled",
+                    "vlans": {},
+                    "vlans-disabled": " ",
+                    "metadata": {},
+                    "clone-pools": {}
+                },
+                "ignore": []
+            },
+            "/example1/Service_Address-10.0.1.10": {
+                "command": "ltm virtual-address",
+                "properties": {
+                    "address": "10.0.1.10",
+                    "arp": "enabled",
+                    "icmp-echo": "enabled",
+                    "mask": "255.255.255.255",
+                    "route-advertisement": "disabled",
+                    "spanning": "disabled",
+                    "server-scope": "any",
+                    "traffic-group": "default"
+                },
+                "ignore": []
+            },
+            "/example1/example1/": {
+                "command": "sys folder",
+                "properties": {},
+                "ignore": []
+            }
+        },
+        "example1Diff": [
+            {
+                "kind": "D",
+                "path": [
+                    "/example1/192.0.1.11"
+                ],
+                "lhs": {
+                    "command": "ltm node",
+                    "properties": {
+                        "address": "192.0.1.11",
+                        "metadata": {}
+                    },
+                    "ignore": []
+                },
+                "tags": [
+                    "tmsh"
+                ],
+                "command": "ltm node",
+                "lhsCommand": "ltm node",
+                "rhsCommand": ""
+            },
+            {
+                "kind": "D",
+                "path": [
+                    "/example1/example1/web_pool1",
+                    "properties",
+                    "members",
+                    "/example1/192.0.1.10:80"
+                ],
+                "lhs": {
+                    "connection-limit": 0,
+                    "dynamic-ratio": 1,
+                    "fqdn": {
+                        "autopopulate": "disabled"
+                    },
+                    "minimumMonitors": 1,
+                    "monitor": {
+                        "default": {}
+                    },
+                    "priority-group": 0,
+                    "rate-limit": "disabled",
+                    "ratio": 1,
+                    "state": "user-up",
+                    "session": "user-enabled",
+                    "metadata": {}
+                },
+                "tags": [
+                    "tmsh"
+                ],
+                "command": "ltm pool",
+                "lhsCommand": "ltm pool",
+                "rhsCommand": "ltm pool"
+            },
+            {
+                "kind": "D",
+                "path": [
+                    "/example1/example1/web_pool1",
+                    "properties",
+                    "members",
+                    "/example1/192.0.1.11:80"
+                ],
+                "lhs": {
+                    "connection-limit": 0,
+                    "dynamic-ratio": 1,
+                    "fqdn": {
+                        "autopopulate": "disabled"
+                    },
+                    "minimumMonitors": 1,
+                    "monitor": {
+                        "default": {}
+                    },
+                    "priority-group": 0,
+                    "rate-limit": "disabled",
+                    "ratio": 1,
+                    "state": "user-up",
+                    "session": "user-enabled",
+                    "metadata": {}
+                },
+                "tags": [
+                    "tmsh"
+                ],
+                "command": "ltm pool",
+                "lhsCommand": "ltm pool",
+                "rhsCommand": "ltm pool"
+            },
+            {
+                "kind": "N",
+                "path": [
+                    "/example1/example1/web_pool1",
+                    "properties",
+                    "members",
+                    "/example1/192.0.1.10:8080"
+                ],
+                "rhs": {
+                    "connection-limit": 0,
+                    "dynamic-ratio": 1,
+                    "fqdn": {
+                        "autopopulate": "disabled"
+                    },
+                    "minimumMonitors": 1,
+                    "monitor": {
+                        "default": {}
+                    },
+                    "priority-group": 0,
+                    "rate-limit": "disabled",
+                    "ratio": 1,
+                    "state": "user-up",
+                    "session": "user-enabled",
+                    "metadata": {}
+                },
+                "tags": [
+                    "tmsh"
+                ],
+                "command": "ltm pool",
+                "lhsCommand": "ltm pool",
+                "rhsCommand": "ltm pool"
+            },
+            {
+                "kind": "N",
+                "path": [
+                    "/example1/example1/web_pool1",
+                    "properties",
+                    "members",
+                    "/example1/192.0.1.15:8080"
+                ],
+                "rhs": {
+                    "connection-limit": 0,
+                    "dynamic-ratio": 1,
+                    "fqdn": {
+                        "autopopulate": "disabled"
+                    },
+                    "minimumMonitors": 1,
+                    "monitor": {
+                        "default": {}
+                    },
+                    "priority-group": 0,
+                    "rate-limit": "disabled",
+                    "ratio": 1,
+                    "state": "user-up",
+                    "session": "user-enabled",
+                    "metadata": {}
+                },
+                "tags": [
+                    "tmsh"
+                ],
+                "command": "ltm pool",
+                "lhsCommand": "ltm pool",
+                "rhsCommand": "ltm pool"
+            },
+            {
+                "kind": "E",
+                "path": [
+                    "/example1/example1/example1",
+                    "properties",
+                    "destination"
+                ],
+                "lhs": "/example1/10.0.1.10:80",
+                "rhs": "/example1/10.0.1.11:80",
+                "tags": [
+                    "tmsh"
+                ],
+                "command": "ltm virtual",
+                "lhsCommand": "ltm virtual",
+                "rhsCommand": "ltm virtual"
+            },
+            {
+                "kind": "D",
+                "path": [
+                    "/example1/Service_Address-10.0.1.10"
+                ],
+                "lhs": {
+                    "command": "ltm virtual-address",
+                    "properties": {
+                        "address": "10.0.1.10",
+                        "arp": "enabled",
+                        "icmp-echo": "enabled",
+                        "mask": "255.255.255.255",
+                        "route-advertisement": "disabled",
+                        "spanning": "disabled",
+                        "server-scope": "any",
+                        "traffic-group": "default"
+                    },
+                    "ignore": []
+                },
+                "tags": [
+                    "tmsh"
+                ],
+                "command": "ltm virtual-address",
+                "lhsCommand": "ltm virtual-address",
+                "rhsCommand": ""
+            },
+            {
+                "kind": "N",
+                "path": [
+                    "/example1/10.0.1.11"
+                ],
+                "rhs": {
+                    "command": "ltm virtual-address",
+                    "properties": {
+                        "address": "10.0.1.11",
+                        "arp": "enabled",
+                        "icmp-echo": "enabled",
+                        "mask": "255.255.255.255",
+                        "route-advertisement": "disabled",
+                        "spanning": "disabled",
+                        "server-scope": "any",
+                        "traffic-group": "default"
+                    },
+                    "ignore": []
+                },
+                "tags": [
+                    "tmsh"
+                ],
+                "command": "ltm virtual-address",
+                "lhsCommand": "",
+                "rhsCommand": "ltm virtual-address"
+            },
+            {
+                "kind": "N",
+                "path": [
+                    "/example1/192.0.1.15"
+                ],
+                "rhs": {
+                    "command": "ltm node",
+                    "properties": {
+                        "address": "192.0.1.15",
+                        "metadata": {}
+                    },
+                    "ignore": []
+                },
+                "tags": [
+                    "tmsh"
+                ],
+                "command": "ltm node",
+                "lhsCommand": "",
+                "rhsCommand": "ltm node"
+            }
+        ],
+        "example1Script": "cli script __appsvcs_update {\nproc script::run {} {\nif {[catch {\ntmsh::modify ltm data-group internal __appsvcs_update records none\n} err]} {\ntmsh::create ltm data-group internal __appsvcs_update type string records none\n}\nif { [catch {\ntmsh::modify ltm pool /example1/example1/web_pool1 members delete \\{ \"/example1/192.0.1.11:80\" \\}\ntmsh::modify ltm pool /example1/example1/web_pool1 members delete \\{ \"/example1/192.0.1.10:80\" \\}\ntmsh::begin_transaction\ntmsh::delete ltm node /example1/192.0.1.11\ntmsh::modify auth partition example1 description \\\"Updated by AS3 at [clock format [clock seconds] -gmt true -format {%a, %d %b %Y %T %Z}]\\\"\ntmsh::modify ltm pool /example1/example1/web_pool1 members add \\{ /example1/192.0.1.10:8080 \\{ connection-limit 0 dynamic-ratio 1 fqdn \\{ autopopulate disabled \\} priority-group 0 rate-limit disabled ratio 1 state user-up session user-enabled metadata none \\} \\}\ntmsh::modify ltm pool /example1/example1/web_pool1 members add \\{ /example1/192.0.1.15:8080 \\{ connection-limit 0 dynamic-ratio 1 fqdn \\{ autopopulate disabled \\} priority-group 0 rate-limit disabled ratio 1 state user-up session user-enabled metadata none \\} \\}\ntmsh::delete ltm virtual /example1/example1/example1\ntmsh::create ltm virtual /example1/example1/example1 enabled  address-status yes auto-lasthop default connection-limit 0 rate-limit disabled description \\\"example1\\\" destination /example1/10.0.1.11:80 ip-protocol tcp last-hop-pool none mask 255.255.255.255 mirror disabled persist replace-all-with \\{ /Common/cookie \\{ default yes \\} \\} pool /example1/example1/web_pool1 policies none profiles replace-all-with \\{ /Common/http \\{ context all \\} /Common/f5-tcp-progressive \\{ context all \\} \\} service-down-immediate-action none source 0.0.0.0/0 source-address-translation \\{ type automap \\} rules none security-log-profiles none source-port preserve translate-address enabled translate-port enabled nat64 disabled vlans none vlans-disabled   metadata none clone-pools none\n\ntmsh::create ltm virtual-address /example1/10.0.1.11 address 10.0.1.11 arp enabled icmp-echo enabled mask 255.255.255.255 route-advertisement disabled spanning disabled server-scope any traffic-group default\ntmsh::create ltm node /example1/192.0.1.15 address 192.0.1.15 metadata none\ntmsh::commit_transaction\ntmsh::delete ltm virtual-address /example1/10.0.1.10\n} err] } {\ncatch { tmsh::cancel_transaction } e\nregsub -all {\"} $err {\\\"} err\ntmsh::modify ltm data-group internal __appsvcs_update records add \\{ error \\{ data \\\"$err\\\" \\} \\}\ntmsh::modify ltm pool /example1/example1/web_pool1 members add \\{ /example1/192.0.1.10:80 \\{ connection-limit 0 dynamic-ratio 1 fqdn \\{ autopopulate disabled \\} priority-group 0 rate-limit disabled ratio 1 state user-up session user-enabled metadata none \\} \\}\ntmsh::modify ltm pool /example1/example1/web_pool1 members add \\{ /example1/192.0.1.11:80 \\{ connection-limit 0 dynamic-ratio 1 fqdn \\{ autopopulate disabled \\} priority-group 0 rate-limit disabled ratio 1 state user-up session user-enabled metadata none \\} \\}\n}}\n}"
+    },
+    "dryRun": true
+}

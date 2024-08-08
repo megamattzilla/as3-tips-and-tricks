@@ -1,0 +1,9 @@
+[
+{% for wafPolicy in WAF_POLICIES %}
+    {
+        "op": "replace",
+        "path": "/{{ wafPolicy.tenant }}/{{ wafPolicy.tenant }}/{{ wafPolicy.name }}/url",
+        "value": "{{ wafPolicy.url }}"
+     }{{ "," if not loop.last else "" }}
+{% endfor %}
+]

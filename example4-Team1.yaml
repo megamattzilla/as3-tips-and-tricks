@@ -9,6 +9,7 @@
       - name: "example1"
         virtualAddresses: "10.0.1.10"
         default_pool: "web_pool1"
+        policyWAF: "asm.appA"
     POOLS:
       - name: "web_pool1"
         servicePort: 80
@@ -22,7 +23,7 @@
       include_vars:
         example4.shared-vars.yml
 
-    - name: Build AS3 declaration in files/example4-AS3.json
+    - name: Build POST AS3 declaration in files/example4-AS3-Team1.json
       template:
-        src: "{{ playbook_dir }}/templates/example4.j2"
-        dest: "{{ playbook_dir }}/files/example4-AS3.json"
+        src: "{{ playbook_dir }}/templates/example4-Team1.j2"
+        dest: "{{ playbook_dir }}/files/example4-AS3-Team1.json"

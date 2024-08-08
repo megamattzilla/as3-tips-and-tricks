@@ -1,0 +1,18 @@
+- name: Example4 jinja2 AS3 template
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: false
+  
+## Playbook Vars Here 
+  vars:
+
+  tasks:
+    
+    - name: load shared vars
+      include_vars:
+        example4.shared-vars.yml
+
+    - name: Build PATCH AS3 declaration in files/example4-AS3-Team2.json
+      template:
+        src: "{{ playbook_dir }}/templates/example4-Team2.j2"
+        dest: "{{ playbook_dir }}/files/example4-AS3-Team2.json"

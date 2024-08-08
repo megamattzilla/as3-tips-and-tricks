@@ -1,6 +1,4 @@
-DATAGROUPS:
-      - name: "web_pool1"
-        servicePort: 80
-        serverAddresses: 
-          - "192.0.1.10"
-          - "192.0.1.11"
+WAF_POLICIES:
+  - name: "asm.appA"
+    tenant: "example1"
+    url: "https://raw.githubusercontent.com/megamattzilla/f5PublicConfigCommon/1.0.4/wafPolicies/asm.appA.xml"

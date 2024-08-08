@@ -1,0 +1,25 @@
+- name: Example jinja2 AS3 template with dry run
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: false
+  
+## Playbook Vars Here 
+  vars:
+    dryrun: true
+    VIRTUALS:
+      - name: "example1"
+        virtualAddresses: "10.0.1.11"
+        default_pool: "web_pool1"
+    POOLS:
+      - name: "web_pool1"
+        servicePort: 8080
+        serverAddresses: 
+          - "192.0.1.10"
+          - "192.0.1.15"
+
+  tasks:
+
+    - name: Build dry run AS3 declaration in files/example5-AS3.json
+      template:
+        src: "{{ playbook_dir }}/templates/example2.j2"
+        dest: "{{ playbook_dir }}/files/example5-AS3.json"
