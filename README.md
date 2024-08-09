@@ -56,7 +56,7 @@ tmsh restart sys service restnoded
 ___
 
 ## #2 Use a Templating Engine <a name="2"></a>
-![alt text](2024-08-08_17-08-07.png)
+![alt text](2024-08-09_09-03-35.png)
 
 Two common templating engines for AS3 schema is [FAST](https://clouddocs.f5.com/products/extensions/f5-appsvcs-templates/latest/) and [jinja2](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_templating.html)
   
@@ -156,7 +156,7 @@ The jinja2 template is located in `templates/example2.j2`
 ___
 
 ## #3 Multi-Team: Refer to something outside AS3 <a name="3"></a>
-![alt text](2024-08-08_17-28-41.png)
+![alt text](2024-08-09_08-48-41.png)
 
 In example #2, we created virtual servers and pools in AS3 schema. 
 

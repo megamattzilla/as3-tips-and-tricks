@@ -1,20 +1,25 @@
 flowchart LR
+I{AS3 POST playbook} --> C(AS3 Endpoint)
+J{No template} --> I{AS3 POST playbook} 
+B --> I(AS3 POST playbook)
 subgraph With Template
     direction LR
-    A[fewest inputs possible: 
+    A[All Variables: 
     virtuals x 3
-    pools x 3] --> B{jinja2 template 
+    pools x 3] --> |Fewest inputs possible| B{jinja2 template 
     with AS3 schema}
-    B --> C(AS3) 
+    
     end
 
 subgraph Without Template
     direction LR
-    D[more AS3 schema:
-    virtual
-    virtual 
-    virtual
-    pool
-    pool
-    pool] --> F(AS3)
+    D[AS3 schema 1:
+    virtual #1
+    pool #1] -->  |More lines to manage| J{No template}
+    G[AS3 schema 2:
+    virtual #2
+    pool #2] -->  |More lines to manage| J{No template}
+    H[AS3 schema 3:
+    virtual #3
+    pool #3] --> |More lines to manage| J{No template}
     end
