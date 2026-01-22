@@ -1,3 +1,7 @@
+*Under Construction*. 🚧
+
+*AI Generated Content* 
+
 # AS3 Troubleshooting: Start Here
 
 If your AS3 declaration failed, do not panic. AS3 provides specific feedback to help locate the syntax or logic error preventing deployment. Follow this guide to interpret the error codes and resolve the issue.
